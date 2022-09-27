@@ -4,3 +4,10 @@ export const api = Axios.create({
   baseURL,
   timeout: 8000
 })
+
+export const giftsApi = Axios.create({
+  baseURL: 'https://bcw-sandbox.herokuapp.com/',
+  timeout:3500,
+
+
+})
