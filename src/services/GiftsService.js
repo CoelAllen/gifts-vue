@@ -13,9 +13,20 @@ class GiftsService{
     const res = await giftsApi.post('/api/gifts', formData)
   
     console.log(res.data);
-    AppState.gifts = res
+    AppState.gifts = [ new Gift(res.data), ...AppState.gifts]
     
     
   }
+  async openGift(id){
+    const openedGift = AppState.gifts.find(o=>o.id==id);
+    if(!openedGift){
+      throw new Error ('bad id')
+    }
+    openedGift.opened = true;
+    const res = await giftsApi.put (`/api/gifts/${id}`, openedGift)
+    openedGift.url = res.data.url
+    
+  }
 }
+
 export const giftsService = new GiftsService()
